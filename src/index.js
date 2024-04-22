@@ -53,15 +53,18 @@ const appRouter = createBrowserRouter([
         path: '/checkout',
         element: <Checkout />,
       },
+      {
+        path: '*',
+        element: <Error />,
+      },
     ],
-  },
-
-  {
-    path: '*',
-    element: <Error />,
   },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-root.render(<RouterProvider router={appRouter} />);
+root.render(
+  <ProductsProvider>
+    <RouterProvider router={appRouter} />
+  </ProductsProvider>
+);
