@@ -41,12 +41,10 @@ const appRouter = createBrowserRouter([
       {
         path: '/products',
         element: <Products />,
-        children: [
-          {
-            path: '/products/:id',
-            element: <SingleProduct />,
-          },
-        ],
+      },
+      {
+        path: '/products/:id',
+        element: <SingleProduct />,
       },
 
       {
