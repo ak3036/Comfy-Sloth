@@ -63,6 +63,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <ProductsProvider>
-    <RouterProvider router={appRouter} />
+    <FilterProvider>
+      <RouterProvider router={appRouter} />
+    </FilterProvider>
   </ProductsProvider>
 );
