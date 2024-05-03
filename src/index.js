@@ -64,7 +64,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <ProductsProvider>
     <FilterProvider>
-      <RouterProvider router={appRouter} />
+      <CartProvider>
+        <RouterProvider router={appRouter} />
+      </CartProvider>
     </FilterProvider>
   </ProductsProvider>
 );
