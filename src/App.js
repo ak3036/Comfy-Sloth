@@ -2,15 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Navbar, Sidebar, Footer } from './components';
+import { AuthWrapper } from './pages/index';
 
 const App = () => {
   return (
-    <div>
+    <AuthWrapper>
       <Navbar />
       <Sidebar />
       <Outlet />
       <Footer />
-    </div>
+    </AuthWrapper>
   );
 };
 

@@ -13,6 +13,7 @@ import {
   About,
   Products,
   PrivateRoute,
+  AuthWrapper,
 } from './pages/index';
 
 import { ProductsProvider } from './context/products_context';
@@ -49,7 +50,11 @@ const appRouter = createBrowserRouter([
 
       {
         path: '/checkout',
-        element: <Checkout />,
+        element: (
+          <PrivateRoute>
+            <Checkout />
+          </PrivateRoute>
+        ),
       },
       {
         path: '*',
@@ -60,13 +65,26 @@ const appRouter = createBrowserRouter([
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+// dev-12olkc0humvlf343.us.auth0.com - Domain
+// 3IGWPYjX6U78IT8PG7JTzQ3jnT2o9ICi - client Id
 
 root.render(
-  <ProductsProvider>
-    <FilterProvider>
-      <CartProvider>
-        <RouterProvider router={appRouter} />
-      </CartProvider>
-    </FilterProvider>
-  </ProductsProvider>
+  <Auth0Provider
+    domain={process.env.REACT_APP_AUTH_DOMAIN}
+    clientId={process.env.REACT_APP_AUTH_CLIENT_ID}
+    authorizationParams={{
+      redirect_uri: window.location.origin,
+    }}
+    cacheLocation='localstorage'
+  >
+    <UserProvider>
+      <ProductsProvider>
+        <FilterProvider>
+          <CartProvider>
+            <RouterProvider router={appRouter} />
+          </CartProvider>
+        </FilterProvider>
+      </ProductsProvider>
+    </UserProvider>
+  </Auth0Provider>
 );
